@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import store from "./store/index";
+import {Provider} from "react-redux";
+
 import Button from 'muicss/lib/react/button';
 import Panel from 'muicss/lib/react/panel';
 
@@ -39,6 +43,7 @@ class TrashBox extends React.Component {
         );
     }
 }
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -665,4 +670,8 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render((
+    <Provider store={store}>
+        <App/>
+    </Provider>
+), document.getElementById('root'));

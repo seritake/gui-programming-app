@@ -8,7 +8,10 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-draggable": "^3.2.1",
-    "react-scripts": "2.1.8"
+    "react-redux": "^7.0.3",
+    "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,6 +31,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.0.1",
+    "redux-devtools": "^3.5.0"
   }
 }

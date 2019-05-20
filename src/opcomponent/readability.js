@@ -1,10 +1,14 @@
 import React, {Component} from "react";
 import OpComponent from './opcomponent'
 import ReactDOM from 'react-dom'
+import Panel from 'muicss/lib/react/panel';
 
 export default class Readability extends OpComponent {
     constructor(props) {
         super(props);
+        this.state = {
+            ...this.state,
+        };
         // override style
         this.boxstyle = {
             ...this.boxstyle,
@@ -51,7 +55,7 @@ export default class Readability extends OpComponent {
             this.boxstyle.background = "#fff";
         }
         return (
-            <div style={this.boxstyle} className="box">
+            <Panel style={this.boxstyle} className="box">
                 <strong className="no-cursor">
                     <div ref='bottom' style={this.bottomstyle} onMouseDown={() => {
                         this.setCompFrom(this);
@@ -60,7 +64,7 @@ export default class Readability extends OpComponent {
                         this.setCompTo(this);
                     }}></div>
                 </strong>
-            </div>
+            </Panel>
         );
     }
 }

@@ -1,17 +1,29 @@
 import React from 'react';
 import OpComponent from './opcomponent'
+import Panel from 'muicss/lib/react/panel';
 
 export default class Start extends OpComponent {
     constructor(props) {
         super(props);
-        this.state = {};
-        this.boxstyle.left = 10;
-        this.boxstyle.top = 40;
+        this.state = {
+            ...this.state,
+        };
+        this.boxstyle.height = 50;
+        this.boxstyle.left = 20;
+        this.boxstyle.top = 10;
+        this.boxstyle.position = "absolute";
+
         this.bottomstyle = {
             ...this.bottomstyle,
             width: 100,
             height: 10,
-        }
+        };
+
+        this.textstyle = {
+            textAlign: "center",
+            position: "relative",
+            top: "30%",
+        };
     }
 
     getTopPosition() {
@@ -19,23 +31,19 @@ export default class Start extends OpComponent {
     }
 
     render() {
-        let textstyle = {
-            textAlign: "center",
-            position: "absolute",
-            top: "35%",
-        };
-
         return (
-            <div style={this.boxstyle} className="box">
-                <div style={textstyle}>
-                    スタート
-                </div>
-                <strong className="no-cursor">
-                    <div  ref='bottom' style={this.bottomstyle} onMouseDown={() => {
-                        this.setCompFrom(this);
-                    }}></div>
-                </strong>
-            </div>
+            <strong className="no-cursor">
+                <Panel style={this.boxstyle} className="box">
+                    <div style={this.textstyle}>
+                        スタート
+                    </div>
+                    <div ref='bottom' style={this.bottomstyle}
+                        onMouseDown={() => {
+                            this.setCompFrom(this);
+                        }}>
+                    </div>
+                </Panel>
+            </strong>
         );
     }
 }

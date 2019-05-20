@@ -2,25 +2,25 @@ import React from 'react';
 import OpComponent from './opcomponent'
 import Panel from 'muicss/lib/react/panel';
 
-export default class BranchDistSensor extends OpComponent {
+export default class LineSensor extends OpComponent {
     constructor(props) {
         super(props);
         this.state = {
             ...this.state,
-            dist: 0,
+            isright: true,
         };
         this.selected_above = false;
         this.abovedstnode = null;
         this.belowdstnode = null;
 
-        this.props.funcs.setOpComponentAttribute(this.number, {dist: this.state.dist});
+        this.props.funcs.setOpComponentAttribute(this.number, {isright: this.state.isright});
         this.setBranch = this.setBranch.bind(this);
 
         this.boxstyle.width = 160;
         this.boxstyle.height = 65;
         this.topstyle = {
             ...this.topstyle,
-            width: 70,
+            width: 160,
             height: 10,
         };
 
@@ -54,11 +54,10 @@ export default class BranchDistSensor extends OpComponent {
 
     }
 
-    setDist(e) {
-        let dist = 0;
-        if(e.target.value) dist = parseInt(e.target.value,10);
-        this.setState({dist: dist});
-        this.props.funcs.setOpComponentAttribute(this.number, {dist: dist});
+    setIsright(e) {
+        let isright = e.target.value === 'true';
+        this.setState({isright: isright,});
+        this.props.funcs.setOpComponentAttribute(this.number, {isright: isright});
     }
 
     setBranch(id) {
@@ -101,24 +100,24 @@ export default class BranchDistSensor extends OpComponent {
                     }}></div>
                 </strong>
                 <div style={this.textstyle}>
-                    距離センサーが
-                    <strong className="no-cursor">
-                        <input style={{width: 40}} defaultValue={this.state.dist} onChange={this.setDist.bind(this)}/>
-                    </strong>
-                    cm
+                    <select name="isright" defaultValue={this.state.isright} onChange={this.setIsright.bind(this)}>
+                        <option value={false}>左</option>
+                        <option value={true}>右</option>
+                    </select>
+                    のセンサーが
                 </div>
                 <strong className="no-cursor">
                     <div ref='above' style={this.bottomleftstyle} onMouseDown={() => {
                         this.selected_above = true;
                         this.setCompFrom(this);
-                    }}>以上
+                    }}>暗い
                     </div>
                 </strong>
                 <strong className="no-cursor">
                     <div ref='below' style={this.bottomrightstyle} onMouseDown={() => {
                         this.selected_above = false;
                         this.setCompFrom(this);
-                    }}>以下
+                    }}>明るい
                     </div>
                 </strong>
             </Panel>

@@ -17,6 +17,19 @@ export default class Graph {
     return this;
   }
 
+  deleteEdge(from,to) {
+    const idx = this.edges[from].findIndex(node => node === to);
+    this.edges[from].splice(idx,1);
+    return this;
+  }
+
+  deleteEdges(deletelist) {
+    for(let [from,to] of deletelist){
+      this.deleteEdge(from,to);
+    }
+    return this;
+  }
+
   setAttribute(id, attr) {
     this.attributes[id] = attr;
     return this;
@@ -32,8 +45,8 @@ export default class Graph {
       visited[node] = true;
       console.log(this.nodes[node]);
       if (node !== this.end_node) {
-        if ((this.nodes[node] === "BranchDistSensor" && this.edges[node].length < 2) ||
-          (this.nodes[node] !== "BranchDistSensor" && this.edges[node].length === 0)) {
+        if (((this.nodes[node] === "BranchDistSensor" || this.nodes[node] === "LineSensor" ) && this.edges[node].length < 2) ||
+          ((this.nodes[node] !== "BranchDistSensor" && this.nodes[node] !== "LineSensor") && this.edges[node].length === 0)) {
           return false;
         }
       }

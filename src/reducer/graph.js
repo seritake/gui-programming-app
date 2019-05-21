@@ -2,6 +2,7 @@ import React from "react";
 import {OBJECT_TYPE} from "../constants/object-types";
 import {CREATE_NODE} from "../constants/action-types";
 import uuid from "uuid/v1";
+import {DIRECTIONS, MAGNITUDE} from "../constants/attribute-consts";
 
 const generateInitialGraph = () => {
     const uuid1 = uuid();
@@ -38,6 +39,33 @@ const createNode = (state, action) => {
     } : {
         next: -1
     };
+
+    let attribute = {};
+    switch (type) {
+        case OBJECT_TYPE.LINE:
+            attribute = {
+                direction: DIRECTIONS.LEFT
+            };
+            break;
+        case OBJECT_TYPE.DISTANCE:
+            attribute = {
+                distance: 10
+            };
+            break;
+        case OBJECT_TYPE.WAIT:
+            attribute = {
+                time: 1000
+            };
+            break;
+        case OBJECT_TYPE.WHEEL:
+            attribute = {
+                direction: DIRECTIONS.LEFT,
+                magnitude: MAGNITUDE.STRONG
+            };
+            break;
+        default:
+            attribute = null;
+    }
     return {
         ...state,
         [id]: {
@@ -47,7 +75,8 @@ const createNode = (state, action) => {
                 x: 200,
                 y: 200,
             },
-            adjacent
+            adjacent,
+            attribute
         }
     }
 };

@@ -6,4 +6,5 @@ export const OBJECT_TYPE = {
     DISTANCE: "DISTANCE",
     LINE: "LINE",
     STOP: "STOP",
+    READABILITY: "READABILITY",
 };

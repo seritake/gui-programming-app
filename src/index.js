@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import store from "./store/index";
-import {Provider} from "react-redux";
+import {Provider, connect} from "react-redux";
 
 import Button from 'muicss/lib/react/button';
 import Panel from 'muicss/lib/react/panel';
